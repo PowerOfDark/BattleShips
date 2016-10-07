@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProtobufSerializer</name>
+    </assembly>
+    <members>
+        <member name="T:NetworkCommsDotNet.DPSBase.ProtobufSerializer">
+            <summary>
+            <see cref="T:NetworkCommsDotNet.DPSBase.DataSerializer"/> using <see href="http://code.google.com/p/protobuf-net/">ProtoBuf-Net</see> to serialize an <see cref="T:System.Object"/> to bytes
+            </summary>
+        </member>
+        <member name="M:NetworkCommsDotNet.DPSBase.ProtobufSerializer.SerialiseDataObjectInt(System.IO.Stream,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:NetworkCommsDotNet.DPSBase.ProtobufSerializer.DeserialiseDataObjectInt(System.IO.Stream,System.Type,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <inheritdoc />
+        </member>
+        <member name="P:NetworkCommsDotNet.DPSBase.ProtobufSerializer.Instance">
+            <summary>
+            Instance singleton used to access <see cref="T:NetworkCommsDotNet.DPSBase.DataSerializer"/> instance.  Use instead <see cref="M:NetworkCommsDotNet.DPSBase.DPSManager.GetDataSerializer``1"/>
+            </summary>
+        </member>
+    </members>
+</doc>

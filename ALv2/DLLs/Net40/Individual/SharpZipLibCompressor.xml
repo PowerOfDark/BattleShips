@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpZipLibCompressor</name>
+    </assembly>
+    <members>
+        <member name="T:SharpZipLibCompressor.SharpZipLibGzipCompressor">
+            <summary>
+            Compresor using Gzip compression from <see href="http://www.icsharpcode.net/opensource/sharpziplib/">SharpZipLib</see>
+            </summary>
+        </member>
+        <member name="M:SharpZipLibCompressor.SharpZipLibGzipCompressor.ForwardProcessDataStream(System.IO.Stream,System.IO.Stream,System.Collections.Generic.Dictionary{System.String,System.String},System.Int64@)">
+            <inheritdoc />
+        </member>
+        <member name="M:SharpZipLibCompressor.SharpZipLibGzipCompressor.ReverseProcessDataStream(System.IO.Stream,System.IO.Stream,System.Collections.Generic.Dictionary{System.String,System.String},System.Int64@)">
+            <inheritdoc />
+        </member>
+        <member name="P:SharpZipLibCompressor.SharpZipLibGzipCompressor.Instance">
+            <summary>
+            Instance singleton used to access <see cref="T:NetworkCommsDotNet.DPSBase.DataProcessor"/> instance.  Obsolete, use instead <see cref="M:NetworkCommsDotNet.DPSBase.DPSManager.GetDataProcessor``1"/>
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,26 @@
+Base Exception Type: ProtoBuf.ProtoException: No parameterless constructor found for S2C_GameStarted
+   at ProtoBuf.Meta.TypeModel.ThrowCannotCreateInstance(Type type) in c:\Dev\protobuf-net\protobuf-net\Meta\TypeModel.cs:line 1397
+   at proto_28(Object , ProtoReader )
+   at ProtoBuf.Meta.RuntimeTypeModel.Deserialize(Int32 key, Object value, ProtoReader source) in c:\Dev\protobuf-net\protobuf-net\Meta\RuntimeTypeModel.cs:line 775
+   at ProtoBuf.Meta.TypeModel.DeserializeCore(ProtoReader reader, Type type, Object value, Boolean noAutoCreate) in c:\Dev\protobuf-net\protobuf-net\Meta\TypeModel.cs:line 700
+   at ProtoBuf.Meta.TypeModel.Deserialize(Stream source, Object value, Type type, SerializationContext context) in c:\Dev\protobuf-net\protobuf-net\Meta\TypeModel.cs:line 589
+   at NetworkCommsDotNet.DPSBase.ProtobufSerializer.DeserialiseDataObjectInt(Stream inputStream, Type resultType, Dictionary`2 options) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\ProtobufSerializer\ProtobufSerializer.cs:line 75
+   at NetworkCommsDotNet.DPSBase.DataSerializer.DeserialiseGeneralObject[T](MemoryStream receivedObjectStream, List`1 dataProcessors, Dictionary`2 options) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\DPSBase\DataSerializer.cs:line 256
+   at NetworkCommsDotNet.DPSBase.DataSerializer.DeserialiseDataObject[T](MemoryStream receivedObjectStream, List`1 dataProcessors, Dictionary`2 options) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\DPSBase\DataSerializer.cs:line 246
+   at NetworkCommsDotNet.Tools.PacketTypeHandlerDelegateWrapper`1.DeSerialize(MemoryStream incomingBytes, SendReceiveOptions options) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\Tools\PacketUnwrappers.cs:line 79
+   at NetworkCommsDotNet.NetworkComms.TriggerAllPacketHandlers(PacketHeader packetHeader, Connection connection, MemoryStream dataStream, SendReceiveOptions options, Boolean ignoreUnknownPacketTypeOverride) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\NetworkComms.cs:line 796
+   at NetworkCommsDotNet.NetworkComms.TriggerAllPacketHandlers(PacketHeader packetHeader, Connection connection, MemoryStream dataStream, SendReceiveOptions options) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\NetworkComms.cs:line 776
+   at NetworkCommsDotNet.NetworkComms.CompleteIncomingItemTask(Object priorityQueueItemObj) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\NetworkComms.cs:line 359
+
+Stack Trace:    at ProtoBuf.Meta.TypeModel.ThrowCannotCreateInstance(Type type) in c:\Dev\protobuf-net\protobuf-net\Meta\TypeModel.cs:line 1397
+   at proto_28(Object , ProtoReader )
+   at ProtoBuf.Meta.RuntimeTypeModel.Deserialize(Int32 key, Object value, ProtoReader source) in c:\Dev\protobuf-net\protobuf-net\Meta\RuntimeTypeModel.cs:line 775
+   at ProtoBuf.Meta.TypeModel.DeserializeCore(ProtoReader reader, Type type, Object value, Boolean noAutoCreate) in c:\Dev\protobuf-net\protobuf-net\Meta\TypeModel.cs:line 700
+   at ProtoBuf.Meta.TypeModel.Deserialize(Stream source, Object value, Type type, SerializationContext context) in c:\Dev\protobuf-net\protobuf-net\Meta\TypeModel.cs:line 589
+   at NetworkCommsDotNet.DPSBase.ProtobufSerializer.DeserialiseDataObjectInt(Stream inputStream, Type resultType, Dictionary`2 options) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\ProtobufSerializer\ProtobufSerializer.cs:line 75
+   at NetworkCommsDotNet.DPSBase.DataSerializer.DeserialiseGeneralObject[T](MemoryStream receivedObjectStream, List`1 dataProcessors, Dictionary`2 options) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\DPSBase\DataSerializer.cs:line 256
+   at NetworkCommsDotNet.DPSBase.DataSerializer.DeserialiseDataObject[T](MemoryStream receivedObjectStream, List`1 dataProcessors, Dictionary`2 options) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\DPSBase\DataSerializer.cs:line 246
+   at NetworkCommsDotNet.Tools.PacketTypeHandlerDelegateWrapper`1.DeSerialize(MemoryStream incomingBytes, SendReceiveOptions options) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\Tools\PacketUnwrappers.cs:line 79
+   at NetworkCommsDotNet.NetworkComms.TriggerAllPacketHandlers(PacketHeader packetHeader, Connection connection, MemoryStream dataStream, SendReceiveOptions options, Boolean ignoreUnknownPacketTypeOverride) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\NetworkComms.cs:line 796
+   at NetworkCommsDotNet.NetworkComms.TriggerAllPacketHandlers(PacketHeader packetHeader, Connection connection, MemoryStream dataStream, SendReceiveOptions options) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\NetworkComms.cs:line 776
+   at NetworkCommsDotNet.NetworkComms.CompleteIncomingItemTask(Object priorityQueueItemObj) in c:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\NetworkCommsDotNet\NetworkComms.cs:line 359

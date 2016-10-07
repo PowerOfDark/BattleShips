@@ -1,0 +1,101 @@
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework\v2.0.50727' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	NetworkCommsDotNet.dll
+	protobuf-net.dll
+	ProtobufSerializer.dll
+	ICSharpCode.SharpZipLib.dll
+	SharpZipLibCompressor.dll
+	InTheHand.Net.Personal.dll
+Trying to read assembly from the file 'C:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\Platforms\Net35\MergedDllBuild\bin\Release\NetworkCommsDotNet.dll'.
+	Successfully read in assembly.
+	There were no errors reported in NetworkCommsDotNet's metadata.
+Trying to read assembly from the file 'C:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\Platforms\Net35\MergedDllBuild\bin\Release\protobuf-net.dll'.
+	Successfully read in assembly.
+	There were no errors reported in protobuf-net's metadata.
+Trying to read assembly from the file 'C:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\Platforms\Net35\MergedDllBuild\bin\Release\ProtobufSerializer.dll'.
+	Successfully read in assembly.
+	There were no errors reported in ProtobufSerializer's metadata.
+Trying to read assembly from the file 'C:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\Platforms\Net35\MergedDllBuild\bin\Release\ICSharpCode.SharpZipLib.dll'.
+Can not find PDB file. Debug info will not be available for assembly 'ICSharpCode.SharpZipLib.dll'.
+	Successfully read in assembly.
+	There were no errors reported in ICSharpCode.SharpZipLib's metadata.
+Trying to read assembly from the file 'C:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\Platforms\Net35\MergedDllBuild\bin\Release\SharpZipLibCompressor.dll'.
+	Successfully read in assembly.
+	There were no errors reported in SharpZipLibCompressor's metadata.
+Trying to read assembly from the file 'C:\Users\Karnifexx\Documents\Visual Studio 2010\Projects\networkcomms.net\Platforms\Net35\MergedDllBuild\bin\Release\InTheHand.Net.Personal.dll'.
+Can not find PDB file. Debug info will not be available for assembly 'InTheHand.Net.Personal.dll'.
+	Successfully read in assembly.
+	There were no errors reported in InTheHand.Net.Personal's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	NetworkCommsDotNet.PeKind = ILonly
+	protobuf-net.PeKind = ILonly
+	ProtobufSerializer.PeKind = ILonly
+	ICSharpCode.SharpZipLib.PeKind = ILonly
+	SharpZipLibCompressor.PeKind = ILonly
+	InTheHand.Net.Personal.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'InTheHand.Net.Personal' is referencing assembly 'System.Configuration'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Configuration'.
+Resolved assembly reference 'System.Configuration' to 'C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Configuration.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'InTheHand.Net.Personal' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+Using assembly 'NetworkCommsDotNet' for assembly-level attributes for the target assembly.
+Merging assembly 'NetworkCommsDotNet' into target assembly.
+Merging assembly 'protobuf-net' into target assembly.
+Merging assembly 'ProtobufSerializer' into target assembly.
+Merging assembly 'ICSharpCode.SharpZipLib' into target assembly.
+Assembly level attribute 'System.Security.AllowPartiallyTrustedCallersAttribute' from assembly 'ICSharpCode.SharpZipLib' being deleted from target assembly
+Merging assembly 'SharpZipLibCompressor' into target assembly.
+Merging assembly 'InTheHand.Net.Personal' into target assembly.
+Copying 1 Win32 Resources from assembly 'NetworkCommsDotNet' into target assembly.
+ILMerge: Signing assembly with the key file 'networkcomms.net.snk'.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'MergedComplete\NetworkCommsDotNetComplete.dll'.
+Location for referenced module 'iphlpapi.dll' is ''
+Location for referenced module 'kernel32.dll' is ''
+Location for referenced module 'AdvApi32.dll' is ''
+Location for referenced module 'Crypt32.dll' is ''
+Location for referenced module 'User32.dll' is ''
+Location for referenced module '32feetWidcomm' is ''
+Location for referenced module 'ws2_32.dll' is ''
+Location for referenced module 'Irprops.cpl' is ''
+Location for referenced module 'bthprops.cpl' is ''
+Location for referenced module 'setupapi.dll' is ''
+Location for referenced module 'bluetooth' is ''
+Location for referenced module 'BsSDK' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework\v2.0.50727\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework\v2.0.50727\system.dll'
+	There were errors reported in System's metadata.
+	Assembly System at platform assembly location C:\Windows\Microsoft.NET\Framework\v2.0.50727 has version 2.0.0.0 which does not match the target platform version 4.0.0.0.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll'
+	There were errors reported in System.Xml's metadata.
+	Assembly System.Xml at platform assembly location C:\Windows\Microsoft.NET\Framework\v2.0.50727 has version 2.0.0.0 which does not match the target platform version 4.0.0.0.
+Location for referenced assembly 'System.Core' is 'C:\WINDOWS\assembly\GAC_MSIL\System.Core\3.5.0.0__b77a5c561934e089\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll'
+	There were errors reported in System.Windows.Forms's metadata.
+	Assembly System.Windows.Forms at platform assembly location C:\Windows\Microsoft.NET\Framework\v2.0.50727 has version 2.0.0.0 which does not match the target platform version 4.0.0.0.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll'
+	There were errors reported in System.Drawing's metadata.
+	Assembly System.Drawing at platform assembly location C:\Windows\Microsoft.NET\Framework\v2.0.50727 has version 2.0.0.0 which does not match the target platform version 4.0.0.0.
+Location for referenced assembly 'System.Configuration' is 'C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Configuration.dll'
+	There were no errors reported in  System.Configuration's metadata.
+ILMerge: Done.

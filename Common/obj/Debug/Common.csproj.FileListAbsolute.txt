@@ -1,0 +1,7 @@
+D:\lo01\Praca Domowa\Battleships\Common\bin\Debug\Common.dll
+D:\lo01\Praca Domowa\Battleships\Common\bin\Debug\Common.pdb
+D:\lo01\Praca Domowa\Battleships\Common\obj\Debug\Common.dll
+D:\lo01\Praca Domowa\Battleships\Common\obj\Debug\Common.pdb
+D:\lo01\Praca Domowa\Battleships\Common\bin\Debug\NetworkCommsDotNetComplete.dll
+D:\lo01\Praca Domowa\Battleships\Common\bin\Debug\NetworkCommsDotNetComplete.pdb
+D:\lo01\Praca Domowa\Battleships\Common\bin\Debug\NetworkCommsDotNetComplete.xml

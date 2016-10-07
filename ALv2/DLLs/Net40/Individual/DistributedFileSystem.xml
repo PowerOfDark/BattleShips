@@ -1,0 +1,1605 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DistributedFileSystem</name>
+    </assembly>
+    <members>
+        <member name="T:DistributedFileSystem.ChunkReplyState">
+            <summary>
+            Used to classify the different types of ChunkAvailabilityReply in response to a ChunkAvailabilityRequest
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.ChunkReplyState.DataIncluded">
+            <summary>
+            Specifies that data will be included.
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.ChunkReplyState.ItemOrChunkNotAvailable">
+            <summary>
+            The item or requested chunk is not available
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.ChunkReplyState.PeerBusy">
+            <summary>
+            The contacted peer is currently busy, please try again later.
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.ChunkAvailabilityRequest">
+            <summary>
+            Wrapper used for requesting a chunk
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkAvailabilityRequest.#ctor(System.String,System.Byte,NetworkCommsDotNet.ConnectionInfo,System.Int64)">
+            <summary>
+            Instantiate a new ChunkAvailabilityRequest
+            </summary>
+            <param name="itemCheckSum">The checksum of the DFS item</param>
+            <param name="chunkIndex">The index of the requested chunk</param>
+            <param name="peerConnectionInfo">The peer contacted for this request</param>
+            <param name="requestNumIndex">The index of this chunk request</param>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityRequest.ItemCheckSum">
+            <summary>
+            The checksum of the item being requested
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityRequest.ChunkIndex">
+            <summary>
+            The index of the requested chunk
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityRequest.RequestNumIndex">
+            <summary>
+            The index of the request. Each request made by the DFS increments the request counter.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityRequest.RequestCreationTime">
+            <summary>
+            The time this request was created
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityRequest.PeerConnectionInfo">
+            <summary>
+            The peer contacted for this request
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityRequest.RequestIncoming">
+            <summary>
+            We are currently processing incoming data for this request.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityRequest.RequestComplete">
+            <summary>
+            We have received data and this request is complete.
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.ChunkAvailabilityReply">
+            <summary>
+            A wrapper used to reply to a ChunkAvailabilityRequest
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkAvailabilityReply.#ctor(System.String,System.String,System.Byte,DistributedFileSystem.ChunkReplyState)">
+            <summary>
+            Create an ChunkAvailabilityReply which will not contain the requested data.
+            </summary>
+            <param name="sourceNetworkIdentifier">The network identifier of the source of this ChunkAvailabilityReply</param>
+            <param name="itemCheckSum">The checksum of the DFS item</param>
+            <param name="chunkIndex">The chunkIndex of the requested item</param>
+            <param name="replyState">A suitable reply state</param>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkAvailabilityReply.#ctor(NetworkCommsDotNet.Tools.ShortGuid,System.String,System.Byte,System.String)">
+            <summary>
+            Create an ChunkAvailabilityReply which will precede the requested data.
+            </summary>
+            <param name="sourceNetworkIdentifier">The network identifier of the source of this ChunkAvailabilityReply</param>
+            <param name="itemCheckSum">The checksum of the DFS item</param>
+            <param name="chunkIndex">The chunkIndex of the requested item</param>
+            <param name="packetIdentifier">The packet identifier used to send the data</param>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkAvailabilityReply.SetChunkData(System.Byte[])">
+            <summary>
+            Set the data for this ChunkAvailabilityReply
+            </summary>
+            <param name="chunkData">The chunk data</param>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkAvailabilityReply.SetSourceConnectionInfo(NetworkCommsDotNet.ConnectionInfo)">
+            <summary>
+            Set the connectionInfo associated with the source of this ChunkAvailabilityReply
+            </summary>
+            <param name="info">The ConnectionInfo associated with the source of this ChunkAvailabilityReply</param>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityReply.ItemCheckSum">
+            <summary>
+            The checksum of the item being requested
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityReply.ChunkIndex">
+            <summary>
+            The index of the requested chunk
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityReply.ReplyState">
+            <summary>
+            The state of this reply
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityReply.PacketIdentifier">
+            <summary>
+            The packet identifier used to send the chunk data
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityReply.SourceNetworkIdentifier">
+            <summary>
+            The network identifier of the peer that generated this ChunkAvailabilityReply
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityReply.SourceConnectionInfo">
+            <summary>
+            The connectionInfo of the peer that generated this ChunkAvailabilityReply
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityReply.ChunkData">
+            <summary>
+            The requested data
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkAvailabilityReply.ChunkDataSet">
+            <summary>
+            True once ChunkData has been set
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.ChunkDataWrapper">
+            <summary>
+            Temporary storage for chunk data which is awaiting corresponding ChunkAvailabilityReply
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkDataWrapper.#ctor(DistributedFileSystem.ChunkAvailabilityReply)">
+            <summary>
+            Initialise a ChunkDataWrapper when the ChunkAvailabilityReply is received before associated data.
+            </summary>
+            <param name="chunkAvailabilityReply">The matching ChunkAvailabilityReply</param>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkDataWrapper.#ctor(System.String,System.Byte[])">
+            <summary>
+            Initialise a ChunkDataWrapper when the data is received before the associated ChunkAvailabilityReply.
+            </summary>
+            <param name="packetIdentifier">The packet identifier of the chunk data</param>
+            <param name="data">The chunk data</param>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkDataWrapper.IncomingPacketIdentifier">
+            <summary>
+            The packet identifier of the chunk data
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkDataWrapper.Data">
+            <summary>
+            The chunk data
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkDataWrapper.TimeCreated">
+            <summary>
+            The time this chunk data was received
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ChunkDataWrapper.ChunkAvailabilityReply">
+            <summary>
+            The ChunkAvailabilityReply associated with this chunk data
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.DFS">
+            <summary>
+            Provides functionality to rapidly distribute large files across a cluster of peers.
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.ChunkRequestTimeoutMS">
+            <summary>
+            The number of milliseconds after which a chunk request times out.
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.MinChunkSizeInBytes">
+            <summary>
+            The minimum size of DFS item chunks
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.MaxConcurrentPeerRequests">
+            <summary>
+            The maximum number of concurrent chunk requests to make to the same peer
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.MaxTotalItemRequests">
+            <summary>
+            The total number of simultaneous chunk requests for a given item
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.MaxConcurrentLocalItemBuild">
+            <summary>
+            The maximum number of DFS items that can be built concurrently
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.PeerMaxNumTimeouts">
+            <summary>
+            The maximum number of times a chunk request can timeout from a peer before it is removed from the swarm
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.PeerBusyTimeoutMS">
+            <summary>
+            The time in milliseconds after which a peer busy flag is removed
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.PeerBusyNetworkLoadThreshold">
+            <summary>
+            While the peer network load goes above this value it will always reply with a busy response 
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.ItemBuildTimeoutSecsPerMB">
+            <summary>
+            The number of seconds to allow per MB when building DFS items
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.swarmedItemsDict">
+            <summary>
+            Dictionary which contains a cache of the distributed items
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.chunkDataCache">
+            <summary>
+            Temporary storage for chunk data which is awaiting info.
+            This stores data based on the peer guid and packet identifier
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.elapsedTimerThread">
+            <summary>
+            Runs a background timer which can be used to decide timeouts for item builds
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.linkWorkerThread">
+            <summary>
+            Linking this DFS to others
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.nullCompressionSRO">
+            <summary>
+            We keep a reference to sendReceiveOptions which use no data compression in the DFS
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.highPrioReceiveSRO">
+            <summary>
+            We keep a reference to sendReceiveOptions which use a high Receive priority
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.concurrentNumLinkItems">
+            <summary>
+            The number of link items to build concurrently
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFS.BuildTaskFactory">
+            <summary>
+            A private task factory for assembling new local DFS items. If we use the NetworkComms.TaskFactory we can end up deadlocking and prevent incoming packets from being handled.
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.Initialise(System.Int32,System.Boolean)">
+            <summary>
+            Initialises the DFS
+            </summary>
+            <param name="initialPort">The local listen port to use</param>
+            <param name="rangeRandomPortFailover">True if a random port should be select if the initialPort is unavailable</param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.InitialiseDFSLink(System.String,System.Int32,DistributedFileSystem.DFSLinkMode)">
+            <summary>
+            Initialises this DFS peer to repeat all items available on the linkTargetIP
+            </summary>
+            <param name="linkTargetIP">The IPAddress corresponding with the link seed</param>
+            <param name="linkTargetPort">The port corresponding with the link seed</param>
+            <param name="linkMode">The link mode to be used</param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.LinkModeWorker">
+            <summary>
+            Background worker thread which maintains the link depending on the selected link mode
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.Shutdown">
+            <summary>
+            Shutdown the DFS. All local DFS items are deleted.
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.ElapsedTimerWorker">
+            <summary>
+            Runs in the background to estimate the elapsed time of the application.
+            We can't use DateTime as elapsed time should not include time during which process was suspended
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.EnableLogging(NetworkCommsDotNet.Tools.ILogger)">
+            <summary>
+            Enable logging in networkComms using the provided logging adaptor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.DisableLogging">
+            <summary>
+            Disable logging in networkComms
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.ItemAlreadyInLocalCache(DistributedFileSystem.DistributedItem)">
+            <summary>
+            Returns true if the provided item is already present within the swarm
+            </summary>
+            <param name="item">The relevant DFS item</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.ItemAlreadyInLocalCache(System.String)">
+            <summary>
+            Returns true if an item with a matching itemCheckSum is present within the local cache
+            </summary>
+            <param name="itemCheckSum">The relevant item MD5 checksum</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.MostRecentlyCompletedItem">
+            <summary>
+            Returns the most recently completed item in the DFS. Returns null if there are no DFS items.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.GetDistributedItemByChecksum(System.String)">
+            <summary>
+            Returns the distributed item with a matching itemCheckSum. Returns null if item is not found.
+            </summary>
+            <param name="itemCheckSum">The item MD5 checksum to match</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.GetDistributedItemByIdentifier(System.String)">
+            <summary>
+            Returns the distributed item with a matching itemIdentifier. Returns null if item is not found.
+            </summary>
+            <param name="itemIdentifier">The item identifier to match</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.RemoveItem(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Remove an item from the DFS. Possibly swarmWide and with or without a removal broadcast
+            </summary>
+            <param name="itemCheckSum">The checksum corresponding with the item to remove</param>
+            <param name="broadcastRemoval">If true all peers will be notified that we are removing this item.</param>
+            <param name="removeSwarmWide">True if this item should be removed swarm wide</param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.RemoveAllItemsFromLocalOnly(System.Boolean)">
+            <summary>
+            Removes all items from local only
+            </summary>
+            <param name="broadcastRemoval">If true all peers will be notified that we are removing all items.</param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.CloseConnectionToCompletedPeers">
+            <summary>
+            Closes all connections to peers who have completed items
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.RemoveAllItemsFromLocalOnly(System.String,System.Boolean)">
+            <summary>
+            Remove any items from the DFS with a matching itemTypeStr
+            </summary>
+            <param name="ItemTypeStr">The item type string to match</param>
+            <param name="broadcastRemoval">If true all peers will be notified that we are removing matching items.</param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.PushItemToPeer(NetworkCommsDotNet.Connections.Connection,DistributedFileSystem.DistributedItem,System.String)">
+            <summary>
+            Introduces a new item into the swarm and sends a build command to the originating requester
+            </summary>
+            <param name="peerConnection">The peer which requested the DFS item</param>
+            <param name="itemToDistribute">The item to be distributed</param>
+            <param name="completedPacketType">The packet type to use once the item has been fully assembled</param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.AddItem(DistributedFileSystem.DistributedItem)">
+            <summary>
+            Adds a distributed item to the local cache and informs any known peers of the item availability
+            </summary>
+            <param name="itemToAdd">The item to add</param>
+            <returns>The actual item added to the local cache. May not be the provided itemToAdd if an item with the same 
+            checksum already existed.</returns>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.CheckForSharedItems(System.String,System.Int32)">
+            <summary>
+            Communicates with the provided peer to see if any item swarms can be linked. This is a single link event, 
+            possibly use InitialiseDFSLink() for a maintained link.
+            </summary>
+            <param name="peerIP">The IPAddress of the peer</param>
+            <param name="peerPort">The port of the peer</param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.AllLocalDFSItemKeys(System.Boolean)">
+            <summary>
+            Returns all item MD5 checksums for DFS items
+            </summary>
+            <param name="completeItemsOnly">If true only returns checksums for completed items</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.AllLocalDFSItemsWithBuildTime(System.Boolean)">
+            <summary>
+            Returns a dictionary of DFS items along with corresponding ItemBuildCompleted times
+            </summary>
+            <param name="completeItemsOnly">If true only returns information for completed items</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.CheckForChunkDataCacheTimeouts">
+            <summary>
+            Flick through the chunk data cache and remove any items that have timed out
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.DFSConnectionShutdown(NetworkCommsDotNet.Connections.Connection)">
+            <summary>
+            If a connection is disconnected we want to make sure we handle it within the DFS
+            </summary>
+            <param name="connection"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.KnownPeersRequest(NetworkCommsDotNet.PacketHeader,NetworkCommsDotNet.Connections.Connection,System.String)">
+            <summary>
+            UDP - Used by a client when requesting a list of known peers
+            </summary>
+            <param name="packetHeader"></param>
+            <param name="connection"></param>
+            <param name="itemCheckSum"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.KnownPeersUpdate(NetworkCommsDotNet.PacketHeader,NetworkCommsDotNet.Connections.Connection,DistributedFileSystem.KnownPeerEndPoints)">
+            <summary>
+            UDP - The response to a DFS_KnownPeersRequest
+            </summary>
+            <param name="packetHeader"></param>
+            <param name="connection"></param>
+            <param name="peerList"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.IncomingLocalItemBuild(NetworkCommsDotNet.PacketHeader,NetworkCommsDotNet.Connections.Connection,DistributedFileSystem.ItemAssemblyConfig)">
+            <summary>
+            TCP - Received by this DFS if a server is telling this instance to build a local file
+            </summary>
+            <param name="packetHeader"></param>
+            <param name="connection"></param>
+            <param name="assemblyConfig"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.RequestLocalItemBuilds(NetworkCommsDotNet.PacketHeader,NetworkCommsDotNet.Connections.Connection,System.String[])">
+            <summary>
+            TCP - A remote peer has request a push of the provided itemCheckSums. This method is used primarily when in repeater mode
+            </summary>
+            <param name="packetHeader"></param>
+            <param name="connection"></param>
+            <param name="itemCheckSums"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.IncomingChunkInterestRequest(NetworkCommsDotNet.PacketHeader,NetworkCommsDotNet.Connections.Connection,DistributedFileSystem.ChunkAvailabilityRequest)">
+            <summary>
+            UDP - Received when a peer request a chunk
+            </summary>
+            <param name="packetHeader"></param>
+            <param name="connection"></param>
+            <param name="incomingRequest"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.IncomingChunkInterestReplyData(NetworkCommsDotNet.PacketHeader,NetworkCommsDotNet.Connections.Connection,System.Byte[])">
+            <summary>
+            TCP - Received when a peer sends us the data portion of a chunk possibly following a request
+            </summary>
+            <param name="packetHeader"></param>
+            <param name="connection"></param>
+            <param name="incomingData"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.IncomingChunkInterestReplyInfo(NetworkCommsDotNet.PacketHeader,NetworkCommsDotNet.Connections.Connection,DistributedFileSystem.ChunkAvailabilityReply)">
+            <summary>
+            UDP and TCP - Received when a peer sends us a chunk data information possibly following a request
+            </summary>
+            <param name="packetHeader"></param>
+            <param name="connection"></param>
+            <param name="incomingReply"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.IncomingPeerChunkAvailabilityUpdate(NetworkCommsDotNet.PacketHeader,NetworkCommsDotNet.Connections.Connection,DistributedFileSystem.PeerChunkAvailabilityUpdate)">
+            <summary>
+            UDP - A remote peer is announcing that it has an updated availability of chunks
+            </summary>
+            <param name="packetHeader"></param>
+            <param name="connection"></param>
+            <param name="updateDetails"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.IncomingChunkAvailabilityRequest(NetworkCommsDotNet.PacketHeader,NetworkCommsDotNet.Connections.Connection,System.String)">
+            <summary>
+            UDP - A remote peer is requesting chunk availability for this local peer
+            </summary>
+            <param name="packetHeader"></param>
+            <param name="connection"></param>
+            <param name="itemCheckSum"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.IncomingItemRemovalUpdate(NetworkCommsDotNet.PacketHeader,NetworkCommsDotNet.Connections.Connection,DistributedFileSystem.ItemRemovalUpdate)">
+            <summary>
+            UDP - A remote peer is informing us that they no longer have an item
+            </summary>
+            <param name="packetHeader"></param>
+            <param name="connection"></param>
+            <param name="itemRemovalUpdate"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DFS.IncomingRemoteItemLinkRequest(NetworkCommsDotNet.PacketHeader,NetworkCommsDotNet.Connections.Connection,DistributedFileSystem.DFSLinkRequest)">
+            <summary>
+            TCP - A remote peer is trying to link DFS items
+            </summary>
+            <param name="packetHeader"></param>
+            <param name="connection"></param>
+            <param name="linkRequestData"></param>
+        </member>
+        <member name="P:DistributedFileSystem.DFS.DFSInitialised">
+            <summary>
+            True if the DFS has been initialised
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DFS.MinTargetLocalPort">
+            <summary>
+            The minimum port number that will be used when initialising the DFS
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DFS.MaxTargetLocalPort">
+            <summary>
+            The maximum port number that will be used when initialising the DFS
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DFS.ValidateEachChunkMD5">
+            <summary>
+            If true ensures all DFS items include chunk MD5 list. Also on build clients will validate the chunk MD5
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DFS.ElapsedExecutionSeconds">
+            <summary>
+            The number of seconds since the initialisation of the DFS. Used as an internal timer, rather than DateTime.Now, to 
+            ensure builds do not time out when a suspended process is restarted.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DFS.IsLinked">
+            <summary>
+            True if this DFS is linked with another peer
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DFS.LinkMode">
+            <summary>
+            The link mode being used
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DFS.TotalNumReturnedChunkRequests">
+            <summary>
+            The total number of completed chunk requests across all DFS items
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DFS.TotalNumRequestedChunks">
+            <summary>
+            The total number of chunks requests by the local DFS
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DFS.Logger">
+            <summary>
+            Access the networkComms logger externally. Allows logging from external sources
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.DistributedItem">
+            <summary>
+            An item that is distributed using the DFS
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DistributedItem.itemBuildTrackerDict">
+            <summary>
+            Used to track chunk requests. Key is chunkIndex and value is the request made
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DistributedItem.chunkDataToIntegrateQueue">
+            <summary>
+            Contains chunk data that is waiting to be integrated
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DistributedItem.itemBuildWait">
+            <summary>
+            Events used during build to sync threads
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DistributedItem.ItemClosed">
+            <summary>
+            True if this item has been closed. Can be used externally to cancel an AssembleItem.
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DistributedItem.itemLocker">
+            <summary>
+            Item specified locker
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.#ctor(System.String,System.String,System.IO.Stream,System.Collections.Generic.List{NetworkCommsDotNet.ConnectionInfo},DistributedFileSystem.DataBuildMode,System.Boolean,System.Int32)">
+            <summary>
+            Instantiate a new DFS item which is complete.
+            </summary>
+            <param name="itemTypeStr">A category string which can be used to group distributed items together.</param>
+            <param name="itemIdentifier">A unique identifier for this item, usually a file name</param>
+            <param name="itemData">A stream containing the data for this item</param>
+            <param name="seedConnectionInfoList">A list of connecitonInfo corresponding to peers that will act as seeds</param>
+            <param name="itemBuildMode">The build mode to be used for distributing this item, i.e. memory or disk, as a single continuous stream or blocks</param>
+            <param name="enableChunkChecksum">If true checkSums will be validated for each chunk before it is integrated. Reduces the performance of the DFS.</param>
+            <param name="itemBuildCascadeDepth">The cascade depth to use when building this item. Default is 1</param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.#ctor(DistributedFileSystem.ItemAssemblyConfig)">
+            <summary>
+            Instantiate a new DFS item which needs to be built.
+            </summary>
+            <param name="assemblyConfig">An ItemAssemblyConfig containing the necessary bootstrap information.</param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.ToString">
+            <summary>
+            Returns ItemTypeStr + ItemIdentifier
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.UpdateBuildTarget(DistributedFileSystem.DataBuildMode)">
+            <summary>
+            Updates the ItemBuildTarget
+            </summary>
+            <param name="newDataBuildMode">The new DataBuildMode to use</param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.IncrementPushCount">
+            <summary>
+            Increments the item push count.
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.AddBuildLogLine(System.String)">
+            <summary>
+            Add the provided string to the build log of this item
+            </summary>
+            <param name="newLine"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.BuildLog">
+            <summary>
+            Get the current build log for this DFS item
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.AssembleItem(System.Int32)">
+            <summary>
+            Assemble this DFS item using the swarm
+            </summary>
+            <param name="assembleTimeoutSecs">The maximum time to allow to build this item before throwing a timeout exception.</param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.HandleIncomingChunkReply(DistributedFileSystem.ChunkAvailabilityReply)">
+            <summary>
+            Handle an incoming chunk reply
+            </summary>
+            <param name="incomingReply">The ChunkAvailabilityReply to handle</param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.ChunkAvailableLocally(System.Byte)">
+            <summary>
+            Returns true if the requested chunk is available locally
+            </summary>
+            <param name="chunkIndex">The chunk index to check</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.GetCompletedItemStream">
+            <summary>
+            Returns a streamSendWrapper that contains the entire item
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.GetCompletedItemBytes">
+            <summary>
+            Once the item has been fully assembled the completed bytes can be access via this method.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.GetChunkDataStream(System.Byte)">
+            <summary>
+            Returns a StreamSendWrapper corresponding to the requested chunkIndex.
+            </summary>
+            <param name="chunkIndex">The desired chunk index data</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.LocalItemValid">
+            <summary>
+            Returns true if the item data validates correctly
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.LocalItemComplete">
+            <summary>
+            Returns true once all chunks have been received and the item has been validated
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.Dispose">
+            <summary>
+            Dispose of this DFS item
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.Load(System.String,System.IO.Stream,System.Collections.Generic.List{NetworkCommsDotNet.ConnectionInfo})">
+            <summary>
+            Load the specified distributed item. Does not add the .DFSItem extension to the fileName
+            </summary>
+            <param name="fileName">The DFS item to load</param>
+            <param name="itemDataStream">The DFS item data</param>
+            <param name="seedConnectionInfoList">The connecitonInfo corresponding with potential seeds</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItem.Save(System.String)">
+            <summary>
+            Save this distributed item (not including item data), adds .DFSItem extension, using the provided filename.
+            </summary>
+            <param name="fileName">The filename to use</param>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItem.ItemIdentifier">
+            <summary>
+            A unique string identifier for this DFS item. Usually a filename.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItem.ItemTypeStr">
+            <summary>
+            A category for this DFS item. Allowed items to be grouped by item type.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItem.ItemBuildCascadeDepth">
+            <summary>
+            The cascade depth to use when building this item. Default is 1
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItem.ItemBuildCompleted">
+            <summary>
+            The DateTime this DFS item was successfully built.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItem.SwarmChunkAvailability">
+            <summary>
+            Contains a record of which peers have which chunks of this DFS item
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItem.Data">
+            <summary>
+            The data for this distributed item
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItem.TotalChunkSupplyCount">
+            <summary>
+            The total number of chunks pushed to peers
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItem.PushCount">
+            <summary>
+            The total number of times this item has been pushed.
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.ShuffleList">
+            <summary>
+            A utility class used to randomly shuffle a list of type T
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.ShuffleList.Shuffle``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Randomly shuffle list
+            </summary>
+            <typeparam name="T">The type of list</typeparam>
+            <param name="list">The list to shuffle</param>
+            <returns>The shuffled list</returns>
+        </member>
+        <member name="T:DistributedFileSystem.PositionLength">
+            <summary>
+            Wrapper used to segment a DFS item data into chunks
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.PositionLength.Position">
+            <summary>
+            The start position in bytes of this chunk
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.PositionLength.Length">
+            <summary>
+            The number of bytes of this chunk
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.PositionLength.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initialise a new PositionLength struct
+            </summary>
+            <param name="position">The start position in bytes of this chunk</param>
+            <param name="length">The number of bytes of this chunk</param>
+        </member>
+        <member name="T:DistributedFileSystem.DistributedItemData">
+            <summary>
+            Manages the respective data for a distributed item
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.#ctor">
+            <summary>
+            Private constructor for deserialisation
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.#ctor(System.String,DistributedFileSystem.DataBuildMode,System.IO.Stream,System.Boolean)">
+            <summary>
+            Initialise the item data using an existing stream. If the build mode is to blocks the itemDataStream is broken into chunks.
+            </summary>
+            <param name="itemIdentifier"></param>
+            <param name="dataBuildMode"></param>
+            <param name="itemDataStream"></param>
+            <param name="enableChunkChecksum"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.#ctor(DistributedFileSystem.DataBuildMode,System.Collections.Generic.Dictionary{System.Int32,System.IO.Stream},System.Boolean)">
+            <summary>
+            Initialise the item data using existing chunk streams. Build mode must be to blocks.
+            </summary>
+            <param name="dataBuildMode"></param>
+            <param name="itemDataStreams"></param>
+            <param name="enableChunkChecksum"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.#ctor(DistributedFileSystem.ItemAssemblyConfig)">
+            <summary>
+            Initialise the item data from an assembly config
+            </summary>
+            <param name="assemblyConfig"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.SetData(System.String,System.IO.Stream)">
+            <summary>
+            Sets the item data using the provided data stream. Useful for setting data after deserialisation
+            </summary>
+            <param name="itemIdentifier"></param>
+            <param name="itemDataStream"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.InitialiseChunkPositionLengthDict">
+            <summary>
+            Calculates the corresponding chunk positions and lengths when this item is deserialised
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.BuildChunkCheckSums">
+            <summary>
+            Uses the loaded stream and builds individual chunk checksums
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.MD5">
+            <summary>
+            Return the MD5 of the whole item data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.MD5(System.Int32)">
+            <summary>
+            Return the MD5 of the specified chunk
+            </summary>
+            <param name="chunkIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.Write(System.Int32,System.Byte[])">
+            <summary>
+            Writes the provided buffer to the data starting at the provided position within the item data
+            </summary>
+            <param name="chunkIndex"></param>
+            <param name="chunkData"></param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.CopyTo(System.IO.Stream)">
+            <summary>
+            Copies data specified by start and length properties from internal stream to the provided stream.
+            </summary>
+            <param name="destinationStream">The destination stream for the item data</param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.GetChunkStream(System.Int32)">
+            <summary>
+            Return a StreamSendWrapper corresponding with the desired chunk
+            </summary>
+            <param name="chunkIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.UpdateBuildTarget(DistributedFileSystem.DataBuildMode)">
+            <summary>
+            Updates the ItemBuildTarget
+            </summary>
+            <param name="newDataBuildMode">The new DataBuildMode to use</param>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.ToArray">
+            <summary>
+            Returns data for the entire item as byte[]
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.GetDataAsSingleStream">
+            <summary>
+            Get a single threadsafe stream containing all item data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.DistributedItemData.Dispose(System.Boolean)">
+            <summary>
+            Disposes the internal stream. If <see cref="P:NetworkCommsDotNet.Tools.StreamTools.ThreadSafeStream.DiposeInnerStreamOnDispose"/> is false, forceDispose
+            must be true to dispose of the internal stream.
+            </summary>
+            <param name="forceDispose">If true the internal stream will be disposed regardless of <see cref="P:NetworkCommsDotNet.Tools.StreamTools.ThreadSafeStream.DiposeInnerStreamOnDispose"/> value.</param>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItemData.CompleteDataCheckSum">
+            <summary>
+            The MD5 checksum for the completed data. Used to validate a completed build.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItemData.ChunkCheckSums">
+            <summary>
+            Optional MD5 checksums for individual chunks. Useful for debugging build issues.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItemData.TotalNumChunks">
+            <summary>
+            Total number of chunks for this item
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItemData.ChunkSizeInBytes">
+            <summary>
+            Maximum size of each chunk in bytes. The final chunk may be less than this value.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItemData.ItemBytesLength">
+            <summary>
+            Total item size in bytes.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItemData.DataBuildMode">
+            <summary>
+            The build mode describing how the item should be built, i.e. memory or disk, as a single stream of multiple blocks
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItemData.ChunkPositionLengthDict">
+            <summary>
+            The chunk positions and lengths. Key is chunkIndex.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItemData.CompleteDataStream">
+            <summary>
+            The stream containing the item chunk data
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DistributedItemData.ChunkDataStreams">
+            <summary>
+            An array of streams that contain the item chunk data. Each index is a matches the 
+            corresponding chunk index.
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.ItemAssemblyConfig">
+            <summary>
+            Provides all the information a new peer requires in order to build the DFS item
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.ItemAssemblyConfig.#ctor">
+            <summary>
+            Private constructor for serialisation.
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.ItemAssemblyConfig.#ctor(DistributedFileSystem.DistributedItem,System.String)">
+            <summary>
+            Instantiate a new ItemAssemblyConfig
+            </summary>
+            <param name="itemToDistribute">The DFS item for which this ItemAssemblyConfig should be created.</param>
+            <param name="completedPacketType">The packet type to use once the item has been fully assembled</param>
+        </member>
+        <member name="P:DistributedFileSystem.ItemAssemblyConfig.SwarmChunkAvailabilityBytes">
+            <summary>
+            The serialised SwarmChunkAvailability 
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ItemAssemblyConfig.TotalNumChunks">
+            <summary>
+            Total number of chunks in this DFS item
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ItemAssemblyConfig.ChunkSizeInBytes">
+            <summary>
+            Maximum size of each chunk in bytes. The final chunk may be less than this value.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ItemAssemblyConfig.TotalItemSizeInBytes">
+            <summary>
+            Total item size in bytes
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ItemAssemblyConfig.CompleteDataCheckSum">
+            <summary>
+            MD5 checksum of assembled item. Used for validating a completed build
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ItemAssemblyConfig.ChunkCheckSums">
+            <summary>
+            Optional MD5 checksums for individual chunks.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ItemAssemblyConfig.CompletedPacketType">
+            <summary>
+            The packet type to use once the item has been fully assembled
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ItemAssemblyConfig.ItemBuildCascadeDepth">
+            <summary>
+            The cascade depth to use when building this item. Default is 1
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ItemAssemblyConfig.ItemTypeStr">
+            <summary>
+            A category string which can be used to group distributed items together
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ItemAssemblyConfig.ItemBuildMode">
+            <summary>
+            Build mode determines how the item should be built, i.e. memory or disk as a single stream or multiple blocks
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.ItemAssemblyConfig.ItemIdentifier">
+            <summary>
+            A unique identifier for this item, usually a file name
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.DataBuildMode">
+            <summary>
+            Describes where a distributed item should be stored during and after being assembled
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DataBuildMode.Memory_Single">
+            <summary>
+            Build the item to a single continuous memory stream. Requires sufficient memory during build.
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DataBuildMode.Memory_Blocks">
+            <summary>
+            Build the item to an array of memory streams. More high performance as reduces locking during build. Requires sufficient memory during build.
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DataBuildMode.Disk_Single">
+            <summary>
+            Build the item to the local application directory as a single file stream.
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DataBuildMode.Disk_Blocks">
+            <summary>
+            Build the item to the local application directory as an array of file streams. More high performance as reduces locking.
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.DFSLinkMode">
+            <summary>
+            The link mode to use
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFSLinkMode.LinkOnly">
+            <summary>
+            Only items existing at both ends are linked
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.DFSLinkMode.LinkAndRepeat">
+            <summary>
+            All items existing on the target peer are retrieved and held locally. Any items already on local will be linked.
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.DFSLinkRequest">
+            <summary>
+            A wrapper used when requesting link items
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.DFSLinkRequest.#ctor(System.Collections.Generic.Dictionary{System.String,System.DateTime},System.Boolean)">
+            <summary>
+            Create an item link request
+            </summary>
+            <param name="availableItems">The available DFS items. Key is itemCheckSum. Value is Item.ItemBuildCompleted</param>
+            <param name="linkRequestReply">True if this DFSLinkRequest is the originating or reply linkRequest</param>
+        </member>
+        <member name="P:DistributedFileSystem.DFSLinkRequest.LinkRequestReply">
+            <summary>
+            If this linkRequest object has been sent in reply to a linkRequest this boolean is true
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.DFSLinkRequest.AvailableItems">
+            <summary>
+            The DFS items which can possibly be linked
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.PeerChunkAvailabilityUpdate">
+            <summary>
+            Object passed around peers to keep everyone updated.
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.PeerChunkAvailabilityUpdate.#ctor(System.String,System.String,DistributedFileSystem.ChunkFlags)">
+            <summary>
+            Instantiate a new PeerChunkAvailabilityUpdate
+            </summary>
+            <param name="sourceNetworkIdentifier">The source network identifier</param>
+            <param name="itemCheckSum">The related DFS item checksum</param>
+            <param name="chunkFlags">The chunk availability flags </param>
+        </member>
+        <member name="P:DistributedFileSystem.PeerChunkAvailabilityUpdate.ItemCheckSum">
+            <summary>
+            The related DFS item checksum
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.PeerChunkAvailabilityUpdate.ChunkFlags">
+            <summary>
+            The chunk availability flags 
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.PeerChunkAvailabilityUpdate.SourceNetworkIdentifier">
+            <summary>
+            The source network identifier
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.LongBitCount">
+            <summary>
+            Utility class used to count the number of set bits in a ulong
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.LongBitCount.CountBits(System.UInt64)">
+            <summary>
+            Returns the number of bits set to 1 in a ulong
+            </summary>
+            <param name="inputLong">The ulong to count</param>
+            <returns></returns>
+        </member>
+        <member name="T:DistributedFileSystem.ChunkFlags">
+            <summary>
+            Provides a 256 length bit flag 
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkFlags.#ctor(System.Byte)">
+            <summary>
+            Initialises the ChunkFlags. The initial state is typically 0 or totalNumChunks
+            </summary>
+            <param name="intialState">The initial state of the ChunkFlags</param>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkFlags.FlagSet(System.Byte)">
+            <summary>
+            Returns true if the provided chunk is available. Zero indexed from least significant bit.
+            </summary>
+            <param name="chunkIndex">The chunk index flag to check</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkFlags.SetFlag(System.Byte,System.Boolean)">
+            <summary>
+            Sets the bit flag to 1 which corresponds with the provided chunk index. Zero indexed from least significant bit.
+            </summary>
+            <param name="chunkIndex">The chunk index to set</param>
+            <param name="state">The state of the flag</param>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkFlags.UpdateFlags(DistributedFileSystem.ChunkFlags)">
+            <summary>
+            Updates local chunk flags with those provided.
+            </summary>
+            <param name="latestChunkFlags">The new chunk flags</param>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkFlags.AllFlagsSet(System.Byte)">
+            <summary>
+            Returns true if all bit flags up to the provided uptoChunkIndexInclusive are set to true
+            </summary>
+            <param name="uptoChunkIndexInclusive">The chunk index up to which the flags should be checked</param>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkFlags.NumCompletedChunks">
+            <summary>
+            Returns the number of completed chunk
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.ChunkFlags.ClearAllFlags">
+            <summary>
+            Sets all chunk flags to unset.
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.PeerInfo">
+            <summary>
+            Wrapper class which contains all of the information, for a single peer, for single distributed item. A peer has a single
+            known chunk availability and identifier but multiple possible IPEndPoints.
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.PeerInfo.IPEndPointBusyAnnounceTimeDict">
+            <summary>
+            Used to maintain peer status
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.#ctor(System.Collections.Generic.List{NetworkCommsDotNet.ConnectionInfo},DistributedFileSystem.ChunkFlags,System.Boolean)">
+            <summary>
+            Initialise a new PeerInfo
+            </summary>
+            <param name="peerConnectionInfo">All ConnectionInfos corresponding with this peer</param>
+            <param name="peerChunkFlags">The initial ChunkFlags for this peer</param>
+            <param name="superPeer">True if this is a SuperPeer</param>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.HasAtleastOneOnlineIPEndPoint">
+            <summary>
+            Returns true if this peer has at least one on line ipEndPoint
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.IsPeerIPEndPointOnline(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Returns true if the specified peer has the specified IPEndPoint online.
+            </summary>
+            <param name="networkIdentifier">The network identifier of the peer to check</param>
+            <param name="peerIPEndPoint">The IPEndPoint of the peer to check</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.SetPeerIPEndPointOnlineStatus(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint,System.Boolean)">
+            <summary>
+            Update the provided peer IPEndPoint online status
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <param name="onlineStatus">The new online status</param>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.IsPeerIPEndPointBusy(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Returns the current busy status of the requested peer IPEndPoint
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.SetPeerIPEndPointBusyStatus(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint,System.Boolean)">
+            <summary>
+            Update the provided peer IPEndPoint busy status
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <param name="busyStatus">The new peer busy status</param>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.CheckAllIPEndPointBusyFlags(System.Int32)">
+            <summary>
+            Clear any busy flags set for the IPEndPoints of this peer if they are older than the provided MS
+            </summary>
+            <param name="msSinceBusyToClear">Milliseconds since busy flag was set to clear</param>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.GetCurrentTimeoutCount(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Return the current timeout count value.
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.GetNewTimeoutCount(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Returns the new timeout count value after incrementing the timeout count.
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.GetConnectionInfo">
+            <summary>
+            Returns a new list containing all peer ConnectionInfos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.RemovePeerIPEndPoint(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Removes the provided connectionInfo from all internal dictionaries. Returns true if connectionInfo exists, otherwise false
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.RemovePeerIPEndPoint(NetworkCommsDotNet.ConnectionInfo)">
+            <summary>
+            Removes the provided connectionInfo from all internal dictionaries. Returns true if connectionInfo exists, otherwise false
+            </summary>
+            <param name="connectionInfo">The connectionInfo to remove</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.AddPeerIPEndPoint(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Add new IPEndPoint for a peer. Returns true if successfully added, otherwise false.
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.PeerContainsIPEndPoint(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Returns true if the provided IPEndPoint exists for this peer
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.ValidateNetworkIdentifier(NetworkCommsDotNet.ConnectionInfo)">
+            <summary>
+            A private method which checks the provided network identifier with that expected.
+            </summary>
+            <param name="connectionInfo"></param>
+        </member>
+        <member name="M:DistributedFileSystem.PeerInfo.ToString">
+            <summary>
+            Returns a clean descriptor for this PeerInfo
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:DistributedFileSystem.PeerInfo.PeerNetworkIdentifier">
+            <summary>
+            Identifies this peer info
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.PeerInfo.PeerChunkFlags">
+            <summary>
+            The chunk availability for this peer.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.PeerInfo.SuperPeer">
+            <summary>
+            For now the only extra info we want. A superPeer is generally busier network wise and should be contacted last for data.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.PeerInfo.PeerConnectionInfo">
+            <summary>
+            All ConnectionInfos corresponding with this peer
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.PeerInfo._peerConnectionInfoSerialized">
+            <summary>
+            Protobuf cannot serialize ConnectionInfo so we provide a backing field and use the ProtoBeforeSerialization and ProtoAfterSerialization methodology to serialize by hand
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.PeerInfo.NumberOfConnectionInfos">
+            <summary>
+            Returns PeerConnectionInfo.Count
+            </summary>
+        </member>
+        <member name="T:DistributedFileSystem.SwarmChunkAvailability">
+            <summary>
+            Wrapper class which contains all of the information, for all peers, for a single distributed item.
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.SwarmChunkAvailability.peerAvailabilityByNetworkIdentifierDict">
+            <summary>
+            Our primary list of peerInfo which is keyed on networkIdentifier
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.SwarmChunkAvailability.peerEndPointToNetworkIdentifier">
+            <summary>
+            An index for peers based on IPEndPoints. Key represents a conversion 
+            from IPEndPoint.ToString() to network identifier
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.SwarmChunkAvailability.alivePeersReceivedEvent">
+            <summary>
+            Triggered when first peer is recorded as being alive
+            </summary>
+        </member>
+        <member name="F:DistributedFileSystem.SwarmChunkAvailability.peerLocker">
+            <summary>
+            A thread sync root
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.#ctor">
+            <summary>
+            Blank constructor used for serialisation
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.#ctor(System.Collections.Generic.List{NetworkCommsDotNet.ConnectionInfo},System.Byte)">
+            <summary>
+            Creates a new instance of SwarmChunkAvailability
+            </summary>
+            <param name="sourceConnectionInfoList">A list of sources. Possibly multiple peers each with multiple IPEndPoints.</param>
+            <param name="totalNumChunks">The total number of chunks in the associated DFS item, used for initialising peer chunkflags</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.CachedNonLocalChunkExistences(System.Byte,System.Collections.Generic.Dictionary{NetworkCommsDotNet.ConnectionInfo,DistributedFileSystem.PeerInfo}@)">
+            <summary>
+            Builds a dictionary of chunk availability throughout the current swarm for chunks we don't have locally. Keys are chunkIndex, peer network identifier, and peer total chunk count
+            </summary>
+            <param name="totalChunksInItem">The total number of chunks in this item</param>
+            <param name="nonLocalPeerAvailability">A quick reference dictionary for matching ConnectionInfo with PeerInfo</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.SetIPEndPointBusy(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Set the provided peer IPEndPoint busy status to busy
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.IPEndPointBusy(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Get the provided peer IPEndPoint busy status
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.SetIPEndPointOffline(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Set the provided peer IPEndPoint as offline
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.IPEndPointOnline(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Get the provided peer IPEndPoint online status
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.PeerExistsInSwarm(NetworkCommsDotNet.Tools.ShortGuid)">
+            <summary>
+            Returns true if a peer with the provided networkIdentifier exists in this SwarmChunkAvailability
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.PeerExistsInSwarm(System.Net.IPEndPoint)">
+            <summary>
+            Returns true if a peer with the provided IPEndPoint exists in the swarm
+            </summary>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.PeerHasChunk(NetworkCommsDotNet.Tools.ShortGuid,System.Byte)">
+            <summary>
+            Returns true if the specified peer has the specified chunkIndex.
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="chunkIndex">The desired chunkIndex</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.PeerIsComplete(NetworkCommsDotNet.Tools.ShortGuid,System.Byte)">
+            <summary>
+            Returns true if a peer has a complete copy of the DFS item
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="totalNumChunks">The total number of chunks in this item</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.PeerIsSuperPeer(NetworkCommsDotNet.Tools.ShortGuid)">
+            <summary>
+            Returns true if the specified peer is a super peer
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.GetNewTimeoutCount(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Returns the new timeout count value after incrementing the timeout count for the provided peer IPEndPoint.
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerIPEndPoint">The relevant IPEndPoint</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.RemovePeerIPEndPointFromSwarm(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint,System.Boolean)">
+            <summary>
+            Deletes knowledge of a peer IPEndPoint from our local swarm chunk availability. 
+            If peerEndPoint.Address is IPAddress.Any then the entire peer will be deleted. 
+            </summary>
+            <param name="networkIdentifier">The network identifier of the relevant peer</param>
+            <param name="peerEndPoint">The relevant IPEndPoint</param>
+            <param name="forceRemoveWholePeer">If true every IPEndPoint is removed for the provided network identifier</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.AddOrUpdateCachedPeerChunkFlags(NetworkCommsDotNet.ConnectionInfo,DistributedFileSystem.ChunkFlags,System.Boolean,System.Boolean)">
+            <summary>
+            Adds or updates a peer to the local availability list. Useful for when a peer informs us of an updated availability.
+            </summary>
+            <param name="connectionInfo">The connectionInfo of the remote peer</param>
+            <param name="latestChunkFlags">The new chunk flags</param>
+            <param name="superPeer">True if this peer is a superPeer</param>
+            <param name="setIPEndPointOnline">Set the relevant IPEndPoint online as a result of updating chunk flags</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.RemoveOldPeerAtEndPoint(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint)">
+            <summary>
+            Removes any peers which have the same endPoint as the provided currentActivePeerEndPoint except one with matching currentActivePeerIdentifier
+            </summary>
+            <param name="currentActivePeerIdentifier">The NetworkIdenfier of the known active peer</param>
+            <param name="currentActivePeerEndPoint">The endPoint of the known active peer</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.SetLocalChunkFlag(System.Byte,System.Boolean)">
+            <summary>
+            Sets our local availability
+            </summary>
+            <param name="chunkIndex">The chunk index flag to update</param>
+            <param name="setAvailable">The availability of the provided chunk</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.UpdatePeerAvailability(System.String,System.Int32,System.Int32,System.Action{System.String})">
+            <summary>
+            Update the chunk availability by contacting all existing peers. If a cascade depth greater than 1 is 
+            provided will also contact each peers peers.
+            </summary>
+            <param name="itemCheckSum">The checksum associated with this item. This will be used when contacting other peers
+            for an update.</param>
+            <param name="cascadeDepth">The depth of the update cascade. 0 - Contact only known peers for an update. 1 - Contact
+            known peers and retrieve their known peers as well. >1 - Not implemented.</param>
+            <param name="responseWaitMS">The maximum time to wait for the first update reply to be received before continuing.</param>
+            <param name="buildLog">An optional build log that can be updated with the progress of this method.</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.ChunkHealthMetric(System.Byte,System.Byte)">
+            <summary>
+            Metric used to determine the health of a chunk and whether swarm will benefit from a broadcasted update. A value 
+            greater than 1 signifies a healthy chunk availability.
+            </summary>
+            <param name="chunkIndex">The relevant chunk index</param>
+            <param name="totalNumChunks">The total number of chunks in this item</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.RecordLocalChunkCompletion(System.Byte)">
+            <summary>
+            Records a chunk as available for the local peer
+            </summary>
+            <param name="chunkIndex">The relevant chunkIndex</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.BroadcastLocalAvailability(System.String)">
+            <summary>
+            Updates all peers in the swarm that we have updated a chunk
+            </summary>
+            <param name="itemCheckSum">The checksum associated with this item</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.CloseConnectionsToCompletedPeers(System.Byte)">
+            <summary>
+            Closes established connections with completed peers as they are now redundant.
+            </summary>
+            <param name="totalNumChunks">The total number of chunks in this item</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.PeerContactAllowed(NetworkCommsDotNet.Tools.ShortGuid,System.Net.IPEndPoint,System.Boolean)">
+            <summary>
+            Single method for determining if contact can be made with the request peer.
+            Prevents loop back contact via matching identifier and currentLocalListenEndPoints.
+            Finally uses the DFS.AllowedPeerIPS and DFS.DisallowedPeerIPS if set.
+            </summary>
+            <param name="peerIdentifier">The relevant network identifier</param>
+            <param name="peerEndPoint">The relevant IPEndPoint</param>
+            <param name="superPeer">True if this peer is a super peer</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.PeerChunkAvailability(NetworkCommsDotNet.Tools.ShortGuid)">
+            <summary>
+            Returns the chunk flag availability of the requested peer.
+            </summary>
+            <param name="peerIdentifier">The relevant network identifier</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.BroadcastItemRemoval(System.String,System.Boolean)">
+            <summary>
+            Broadcast to all known peers that the local DFS is removing the specified item.
+            </summary>
+            <param name="itemCheckSum">The checksum associated with this item</param>
+            <param name="removeSwarmWide">True if the item should be removed by all peers, swarm wide</param>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.NumPeersInSwarm(System.Boolean)">
+            <summary>
+            The number of peers in this swarm
+            </summary>
+            <param name="excludeSuperPeers">True if super peers should be excluded from the count.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.NumCompletePeersInSwarm(System.Byte,System.Boolean)">
+            <summary>
+            The number of complete peers in this swarm.
+            </summary>
+            <param name="totalItemChunks">The total number of chunks in this item</param>
+            <param name="excludeSuperPeers">True if super peers should be excluded from the count.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.AllPeerIdentifiers">
+            <summary>
+            Returns an array containing the network identifiers of every peer in this swarm
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.AllPeerEndPoints">
+            <summary>
+            Returns an array containing all known peer endpoints in the format locaIP:port
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.ClearAllLocalAvailabilityFlags">
+            <summary>
+            Clear all chunk availability flags for the local peer
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.SwarmChunkAvailability.ThreadSafeSerialise">
+            <summary>
+            Serialise this swarm chunk availability in a thread safe manner
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DistributedFileSystem.KnownPeerEndPoints">
+            <summary>
+            A wrapper classed used to inform remote peers of our known peers
+            </summary>
+        </member>
+        <member name="M:DistributedFileSystem.KnownPeerEndPoints.#ctor(System.String,System.String[])">
+            <summary>
+            Initialise a new KnownPeerEndPoints
+            </summary>
+            <param name="itemCheckSum">The checksum identifier for the included peer end points.</param>
+            <param name="knownPeerEndPoints">All known IPEndPoints for this item</param>
+        </member>
+        <member name="P:DistributedFileSystem.KnownPeerEndPoints.ItemChecksm">
+            <summary>
+            The checksum identifier for the included peer end points.
+            </summary>
+        </member>
+        <member name="P:DistributedFileSystem.KnownPeerEndPoints.PeerEndPoints">
+            <summary>
+            All known IPEndPoints for this item
+            </summary>
+        </member>
+    </members>
+</doc>

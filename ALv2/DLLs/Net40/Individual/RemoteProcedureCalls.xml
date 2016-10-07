@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RemoteProcedureCalls</name>
+    </assembly>
+    <members>
+        <member name="T:RemoteProcedureCalls.IRPCProxy">
+            <summary>
+            Interface for the RPC proxy generated on the client side. All RPC objects returned from Client.CreateRPCProxyTo{X} implement this interface
+            </summary>
+        </member>
+        <member name="P:RemoteProcedureCalls.IRPCProxy.ImplementedInterface">
+            <summary>
+            The interface the proxy implements
+            </summary>
+        </member>
+        <member name="P:RemoteProcedureCalls.IRPCProxy.ServerInstanceID">
+            <summary>
+            The server generated object id for the remote instance
+            </summary>
+        </member>
+        <member name="P:RemoteProcedureCalls.IRPCProxy.ServerConnection">
+            <summary>
+            The NetworkComms.Net connection associated wth the proxy
+            </summary>
+        </member>
+        <member name="P:RemoteProcedureCalls.IRPCProxy.SendReceiveOptions">
+            <summary>
+            The send receive options used when communicating with the server
+            </summary>
+        </member>
+        <member name="P:RemoteProcedureCalls.IRPCProxy.RPCTimeout">
+            <summary>
+            The timeout for all RPC calls made with this proxy in ms
+            </summary>
+        </member>
+        <member name="P:RemoteProcedureCalls.IRPCProxy.IsDisposed">
+            <summary>
+            Gets a value indicating whether the <see cref="T:RemoteProcedureCalls.IRPCProxy"/> has been disposed of
+            </summary>
+        </member>
+        <member name="T:RemoteProcedureCalls.Client">
+            <summary>
+            Provides functions for managing proxy classes to remote objects client side
+            </summary>
+        </member>
+        <member name="M:RemoteProcedureCalls.Client.CreateProxyToPrivateInstance``1(NetworkCommsDotNet.Connections.Connection,System.String,System.String@,NetworkCommsDotNet.SendReceiveOptions)">
+            <summary>
+            Creates a remote proxy instance for the desired interface with the specified server and object identifier.  Instance is private to this client in the sense that no one else can
+            use the instance on the server unless they have the instanceId returned by this method
+            </summary>
+            <typeparam name="I">The interface to use for the proxy</typeparam>
+            <param name="connection">The connection over which to perform remote procedure calls</param>
+            <param name="instanceName">The object identifier to use for this proxy</param>
+            <param name="instanceId">Outputs the instance Id uniquely identifying this object on the server.  Can be used to re-establish connection to object if connection is dropped</param>
+            <param name="options">SendRecieve options to use</param>
+            <returns>A proxy class for the interface I allowing remote procedure calls</returns>
+        </member>
+        <member name="M:RemoteProcedureCalls.Client.CreateProxyToPublicNamedInstance``1(NetworkCommsDotNet.Connections.Connection,System.String,System.String@,NetworkCommsDotNet.SendReceiveOptions)">
+            <summary>
+            Creates a remote proxy instance for the desired interface with the specified server and object identifier.  Instance is public in sense that any client can use specified name to make 
+            calls on the same server side object 
+            </summary>
+            <typeparam name="I">The interface to use for the proxy</typeparam>
+            <param name="connection">The connection over which to perform remote procedure calls</param>
+            <param name="instanceName">The name specified server side to identify object to create proxy to</param>
+            <param name="instanceId">Outputs the instance Id uniquely identifying this object on the server.  Can be used to re-establish connection to object if connection is dropped</param>
+            <param name="options">SendRecieve options to use</param>
+            <returns>A proxy class for the interface I allowing remote procedure calls</returns>
+        </member>
+        <member name="M:RemoteProcedureCalls.Client.CreateProxyToIdInstance``1(NetworkCommsDotNet.Connections.Connection,System.String,NetworkCommsDotNet.SendReceiveOptions)">
+            <summary>
+            Creates a remote proxy to an object with a specific identifier implementing the supplied interface with the specified server
+            </summary>
+            <typeparam name="I">The interface to use for the proxy</typeparam>
+            <param name="connection">The connection over which to perform remote procedure calls</param>
+            <param name="instanceId">Unique identifier for the instance on the server</param>
+            <param name="options">SendRecieve options to use</param>
+            <returns>A proxy class for the interface T allowing remote procedure calls</returns>
+        </member>
+        <member name="M:RemoteProcedureCalls.Client.RemoteCallClient(RemoteProcedureCalls.IRPCProxy,System.String,System.Object[])">
+            <summary>
+            Private method for simplifying the remote procedure call.  I don't want to write this in IL!!
+            </summary>
+            <param name="clientObject"></param>
+            <param name="functionToCall"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RemoteProcedureCalls.Client.DestroyRPCClient(RemoteProcedureCalls.IRPCProxy)">
+            <summary>
+            Causes the provided <see cref="T:RemoteProcedureCalls.IRPCProxy"/> instance to be disposed
+            </summary>
+            <param name="clientObject">The <see cref="T:RemoteProcedureCalls.IRPCProxy"/> to dispose</param>
+        </member>
+        <member name="P:RemoteProcedureCalls.Client.DefaultRPCTimeout">
+            <summary>
+            The default timeout period in ms for new RPC proxies. Default value is 1000ms 
+            </summary>
+        </member>
+        <member name="P:RemoteProcedureCalls.Client.RPCInitialisationTimeout">
+            <summary>
+            The timeout period allowed for creating new RPC proxies
+            </summary>
+        </member>
+        <member name="T:RemoteProcedureCalls.Client.CachedRPCKey">
+            <summary>
+            Struct that helps store the cached RPC objects
+            </summary>
+        </member>
+        <member name="T:RemoteProcedureCalls.Client.Cache`1">
+            <summary>
+            Funky class used for dynamically creating the proxy
+            </summary>
+            <typeparam name="I"></typeparam>
+        </member>
+        <member name="T:RemoteProcedureCalls.RPCException">
+            <summary>
+            An error occured during an RPC (Remote Procedure Call) exchange.
+            </summary>
+        </member>
+        <member name="M:RemoteProcedureCalls.RPCException.#ctor(System.String)">
+            <summary>
+            Create a new instance of RPCException
+            </summary>
+            <param name="msg">A string containing useful information regarding the error</param>
+        </member>
+        <member name="T:RemoteProcedureCalls.Server">
+            <summary>
+            Contains methods for managing objects server side which allow Remote Procedure Calls
+            </summary>
+        </member>
+        <member name="M:RemoteProcedureCalls.Server.GetInstanceId(System.String)">
+            <summary>
+            Helper method for calculating instance ids
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RemoteProcedureCalls.Server.RegisterTypeForPrivateRemoteCall``2(System.Int32)">
+            <summary>
+            Registers a type for private RPC whereby each client generates it's own private instances on the server
+            </summary>
+            <typeparam name="T">The type of object to create new instances of for RPC.  Must implement I</typeparam>
+            <typeparam name="I">Interface that should be provided for RPC</typeparam>
+            <param name="timeout">If specified each RPC object created will be destroyed if it is unused for a time, in ms, specified by timeout</param>            
+        </member>
+        <member name="M:RemoteProcedureCalls.Server.RegisterInstanceForPublicRemoteCall``2(``0,System.String)">
+            <summary>
+            Registers a specfic object instance, with the supplied name, for RPC
+            </summary>
+            <typeparam name="T">The type of the object to register. Must implement I</typeparam>
+            <typeparam name="I">The interface to be provided for RPC</typeparam>
+            <param name="instance">Instance to register for RPC</param>
+            <param name="instanceName">Name of the instance to be used by clients for RPC</param>
+        </member>
+        <member name="M:RemoteProcedureCalls.Server.RemovePrivateRPCObjectType``2">
+            <summary>
+            Removes all private RPC objects for the specified interface type.  Stops listenning for new RPC instance connections
+            </summary>
+            <typeparam name="T">Object type that implements the specified interface I</typeparam>
+            <typeparam name="I">Interface that is being implemented for RPC calls</typeparam>
+        </member>
+        <member name="M:RemoteProcedureCalls.Server.RemovePublicRPCObject(System.Object)">
+            <summary>
+            Disables RPC calls for the supplied named public object supplied
+            </summary>
+            <param name="instance">Instance to disable RPC for</param>
+        </member>
+        <member name="M:RemoteProcedureCalls.Server.ShutdownAllRPC">
+            <summary>
+            Removes all public and private RPC objects and removes all related packet handlers from NetworkComms
+            </summary>
+        </member>
+        <member name="T:RemoteProcedureCalls.RemoteCallWrapper">
+            <summary>
+            Wrapper class used for serialisation when running functions remotely
+            </summary>
+        </member>
+        <member name="T:RemoteProcedureCalls.RPCArgumentBase">
+            <summary>
+            Cheeky base class used in order to allow us to send an array of objects using Protobuf-net
+            </summary>
+        </member>
+        <member name="T:RemoteProcedureCalls.RPCArgument`1">
+            <summary>
+            Cheeky derived class used in order to allow us to send an array of objects using Protobuf-net
+            </summary>
+        </member>
+    </members>
+</doc>

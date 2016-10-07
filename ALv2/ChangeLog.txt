@@ -1,0 +1,98 @@
+Version 3.0 - Released 18/03/14
+
+- Bluetooth connections (only for .net 3.5 upwards, excluding Windows Phone 8 and WinRT).
+- Unmanaged connections -  Interface with other network libraries, embedded controllers, legacy hardware devices, etc.
+- Support for WinRT - Use NetworkComms.Net in your windows store applications.
+- Peer discovery - Easily discover NetworkComms.Net peers in the local network.
+- SSL connections  - Introduces asymmetric encryption (excluding Windows Phone 8 and WinRT).
+- Significantly improved support for Remote Procedure Calls (RPC), including remote events.
+- Other security features:
+	\ Ability to restrict incoming IP ranges based on CIDR matches.
+	\ Automatically pad encrypted data preventing traffic analysis side channel attacks.
+	\ Nested packets that allow headers to be encrypted.
+	\ DOS protection which can ban remote clients based on set criteria, such as malformed data.
+- Strong named assemblies.
+- Generalised logging interface.
+- All features are now granular allowing configuration at the global, connection or listener specific level.
+- Protobuf serializer moved in to extension. Allows for more generalised serializer support.
+- Explicit serializer interface can now be used to achieve maximum serialization/deserialization throughput.
+- Large number of tools which can be used to simplify adding network related functionality to your applications.
+- Many performance improvements throughout.
+- Significant API changes. See updated examples before upgrading from v2.x.
+
+Version 2.3 - Released 11/06/13
+
+- Extended mobile platform support to include Xamarion.iOS and Xamarin.Android
+- NetworkComms.Net also available from Xamarin component store.
+- New examples for mobile platforms and file transfer.
+- Updated existing examples to ensure greater clarity.
+- Bug fixes when using streams over 2GB, NAT configurations.
+- Inline XML documentation for merged DLLs.
+- Corrected gendarme high severity notifications.
+- DFS improvements when using disk build targets.
+- Added light logging optional alternative to NLOG.
+- Updated to protobuf r638.
+
+Version 2.2 - Released 16/03/13
+
+- Extended platform support, .Net2+, Windows Phone 8 (WP8) and Silverlight.
+- New examples for VB.Net and WP8.
+- UDP demonstration added to WPF chat examples.
+- Fixes for Unity3D.
+- Updated documentation.
+- Obsoleted methods from v1.x removed.
+- Performance improvements to distributed file system.
+
+Version 2.1 - Released 29/01/13
+
+- Switched from log4net to NLog to allow future mobile framework development.
+- Solution layout improvements.
+- Bug fixes to IPv6.
+- More examples.
+
+Version 2.0 - Released 20/12/12
+
+- UDP support.
+- Encryption support.
+- IPv6 support.
+- Significant API changes.
+- Automatic serialisation and compression detection.
+- Packet prioritisation.
+- Support for sending v.large files via streams.
+- Multiple adaptor improvements.
+- Connection specific feature granulation.
+- Improved RPC support.
+- Significant improvements in flexibility, extendibility and performance.
+- Better documentation.
+- Dedicated website.
+
+Version 2.0 Beta 1 - Released 12/11/12
+
+Version 1.3 - Released 03/6/12
+
+- Multiple network adaptor support.
+- Improved local IP detection. Possible to provide preferred adaptor name as well as existing IPs.
+- DFS and network load detection improvements.
+- Better support and custom build flags for iOS environments.
+
+Version 1.2 - Released 14/3/12
+
+- Streamlined Remote Procedure Call (RPC) support added, including new RPC example.
+- Connection keep alive (nullPacket) to prevent high latency TCP connections being severed.
+- Improvements to error messages and exceptions so that they are more helpful.
+- Added a publicly accessible shutdown event delegate to networkComms.
+- Implemented full usage of log4net in examples. See log4net.config to change outputs.
+- General bug fixes
+
+Version 1.1 - Released 17/2/12
+
+- Bug fixes which occur very rarely (<0.1%) during VERY high loads (1000+ connections)
+- All logging is now performed via the Common.Logging 2.0 interface to offer a little more versatility. Fatal errors will still output independent error files as well
+- Spelling correction to SendReceive<> methods
+- Added public access to NetworkComms.CloseConnection(ConnectionId)
+- Added local listen port selection to AdvancedSend example
+- Minor improvements to distributed file system (DFS) example
+
+Version 1.0 - Released 2011
+
+- Base release of NetworkCommsDotNet.

@@ -1,0 +1,8 @@
+D:\lo01\Praca Domowa\Battleships\Common\bin\Release\Common.dll
+D:\lo01\Praca Domowa\Battleships\Common\bin\Release\Common.pdb
+D:\lo01\Praca Domowa\Battleships\Common\bin\Release\NetworkCommsDotNetComplete.dll
+D:\lo01\Praca Domowa\Battleships\Common\bin\Release\NetworkCommsDotNetComplete.pdb
+D:\lo01\Praca Domowa\Battleships\Common\bin\Release\NetworkCommsDotNetComplete.xml
+D:\lo01\Praca Domowa\Battleships\Common\obj\Release\Common.dll
+D:\lo01\Praca Domowa\Battleships\Common\obj\Release\Common.pdb
+D:\lo01\Praca Domowa\Battleships\Common\obj\Release\Common.csprojResolveAssemblyReference.cache

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JSONSerializer</name>
+    </assembly>
+    <members>
+        <member name="M:NetworkCommsDotNet.DPSBase.JSONSerializer.SerialiseDataObjectInt(System.IO.Stream,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:NetworkCommsDotNet.DPSBase.JSONSerializer.DeserialiseDataObjectInt(System.IO.Stream,System.Type,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{988F5040-BC69-40BA-988D-D847211C5B33}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NetworkCommsDotNetComplete, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f58108eb6480f6ec, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ALv2\DLLs\Net35\Merged\NetworkCommsDotNetComplete.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Net.cs" />
+    <Compile Include="Packets\C2S\Auth\C2S_Handshake.cs" />
+    <Compile Include="Packets\C2S\Game\C2S_FireAt.cs" />
+    <Compile Include="Packets\C2S\Game\C2S_GameReady.cs" />
+    <Compile Include="Packets\C2S\Lobby\C2S_AcceptIncomingPlayerInvite.cs" />
+    <Compile Include="Packets\C2S\Lobby\C2S_JoinLobby.cs" />
+    <Compile Include="Packets\C2S\Lobby\C2S_RevokeSentPlayerInvite.cs" />
+    <Compile Include="Packets\C2S\Lobby\C2S_SendPlayerInvite.cs" />
+    <Compile Include="Packets\C2S\Request\C2S_Request.cs" />
+    <Compile Include="Packets\S2C\Game\S2C_GameEnded.cs" />
+    <Compile Include="Packets\S2C\Game\S2C_GameStarted.cs" />
+    <Compile Include="Packets\S2C\Game\S2C_GameTurnInfo.cs" />
+    <Compile Include="Packets\S2C\Game\S2C_GameBoardUpdated.cs" />
+    <Compile Include="Packets\S2C\Lobby\S2C_InitialLobbyData.cs" />
+    <Compile Include="Packets\S2C\Lobby\S2C_InitNewGame.cs" />
+    <Compile Include="Packets\S2C\Lobby\S2C_LobbyPlayerJoined.cs" />
+    <Compile Include="Packets\S2C\Lobby\S2C_LobbyPlayerLeft.cs" />
+    <Compile Include="Packets\S2C\Lobby\S2C_ServerPlayersOnlineCount.cs" />
+    <Compile Include="Packets\S2C\Lobby\S2C_RevokedIncomingPlayerInvite.cs" />
+    <Compile Include="Packets\S2C\Lobby\S2C_RevokedSentPlayerInvite.cs" />
+    <Compile Include="Packets\S2C\Lobby\S2C_SentPlayerInvite.cs" />
+    <Compile Include="Packets\S2C\S2C_HandshakeResponse.cs" />
+    <Compile Include="Packets\S2C\Lobby\S2C_IncomingPlayerInvite.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RWLock.cs" />
+    <Compile Include="Structures\Common\BoardOwner.cs" />
+    <Compile Include="Structures\Common\GameResult.cs" />
+    <Compile Include="Structures\Common\PlayerBase.cs" />
+    <Compile Include="Structures\Common\PlayerDisplay.cs" />
+    <Compile Include="Structures\Common\PlayerState.cs" />
+    <Compile Include="Structures\Local\LocalGameState.cs" />
+    <Compile Include="Structures\Local\SeaCellTargetMode.cs" />
+    <Compile Include="Structures\Local\SimpleBoard.cs" />
+    <Compile Include="Structures\Local\SimpleSeaCell.cs" />
+    <Compile Include="Structures\Remote\Game\Board.cs" />
+    <Compile Include="Structures\Remote\Game\FireResult.cs" />
+    <Compile Include="Structures\Remote\Game\Fleet.cs" />
+    <Compile Include="Structures\Remote\Game\Game.cs" />
+    <Compile Include="Structures\Remote\Game\GameState.cs" />
+    <Compile Include="Structures\Remote\Game\GameRuleSetBase.cs" />
+    <Compile Include="Structures\Remote\Game\PlayerSide.cs" />
+    <Compile Include="Structures\Remote\RemotePlayer.cs" />
+    <Compile Include="Structures\Remote\Game\SeaCell.cs" />
+    <Compile Include="Structures\Remote\Game\SeaCellState.cs" />
+    <Compile Include="Structures\Remote\Game\SeededRandomBoardGenerator.cs" />
+    <Compile Include="Structures\Remote\Game\Ship.cs" />
+    <Compile Include="Structures\Remote\Game\ShipInfo.cs" />
+    <Compile Include="Structures\Remote\Game\StandardGameRuleSet.cs" />
+    <Compile Include="Structures\Surrogates\ShortGuidSurrogate.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
